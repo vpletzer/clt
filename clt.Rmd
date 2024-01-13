@@ -1,0 +1,23 @@
+---
+title: "The Central Limit Theorem"
+output: html_notebook
+---
+
+
+```{r}
+library(scales)
+# generate 1e6. r.v from N(0,1)
+y <- rnorm(1e6, 0, 1)
+#sample 100 values from N(0,1), 1000 times
+#number of samples used in the averaging
+n <- 100
+mat <- array(rnorm(n * 1000, 0, 1), dim = c(1000, n))
+#take the average of values in each row
+z <- rowMeans(mat)
+
+#plot the histograms on top of each other
+hist(y, xlim=c(-5,5),col=scales::alpha('skyblue', .5), border=F)
+hist(z, add = T, col= 'red',border=F)
+```
+
+The more samples you take the more accurate the estimate becomes. This is seen by how peaked the histogram of Z values is.
